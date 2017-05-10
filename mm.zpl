@@ -1,3 +1,7 @@
+# load data
+#
+#
+
 set token := {read "dict.txt" as "<1s>"};
 set key_size := {1..46};
 set key := {read "keys.txt" as "<1s>"};
