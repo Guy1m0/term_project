@@ -96,7 +96,8 @@ def write_on_file():
 	e = open('gram.txt',"w+")
 	for gra in gra_list:
 		#print gra
-		line = gra[0] + " " + gra[1]
+
+		line = tag_update(gra[0]) + " " + tag_update(gra[1])
 		'''
 		for key in keys:
 			if gra[0] == key or gra[1] == key:
@@ -106,7 +107,14 @@ def write_on_file():
 		'''
 		line += "\n"
 		e.write(line)
-	e.close() 
+	e.close()
+
+def tag_update(tag):
+	if tag == ',':
+		return 'COM$'
+	if tag == ':':
+		return 'COL$'
+	return tag
 
 def modify_raw(filename):
 	g = open('text.txt',"w+")
@@ -140,7 +148,7 @@ def modify_raw(filename):
 		#print "wr:", wr
 		if len(wr) > 0:
 			g.write(wr[:-2] + "\n")
-			g.write('COL$\n')
+			g.write('.\n')
 	f.close()
 	g.close()
 
