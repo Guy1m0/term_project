@@ -66,6 +66,15 @@ def change_tag(ori,tag):
 	return new_tag
 
 def write_on_file():
+	g = open('keys.txt',"w+")
+	for key in keys:
+		if key == ',':
+			key = 'COM$'
+		if key == ':':
+			key = 'COL$'
+		g.write(key + "\n")
+	g.close()
+
 	f = open('dict.txt',"w+")
 	for token,tag in dic.iteritems():
 		for i in range(1,47):
