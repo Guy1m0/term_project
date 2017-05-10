@@ -151,6 +151,12 @@ def modify_raw(filename):
 				
 				wr += 'COM$\n'
 				continue
+
+			if "'s" in word:
+				wr += "'s\n"
+				word = word[:-2]
+				index += 1
+				wr += str(index) + " "
 			'''
 			if ':' in word or ';' in word:
 				wr += word[:-1]+"\n"
