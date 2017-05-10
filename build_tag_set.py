@@ -68,8 +68,10 @@ def change_tag(ori,tag):
 def write_on_file():
 	f = open('dict.txt',"w+")
 	for token,tag in dic.iteritems():
-		line = token + tag + "\n"
-		f.write(line)
+		for i in range(1,47):
+			line = token + " " + str(i) + tag[:2] + "\n"
+			tag= tag[2:]
+			f.write(line)
 	f.close()
 
 	e = open('gram.txt',"w+")
