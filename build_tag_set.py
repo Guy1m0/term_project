@@ -37,6 +37,14 @@ def build_dict(size):
 	print "grammar variables:",len(gra_list)
 	print "dic variables:", len(dic)
 
+	if ',' in dic:
+		dic['COM$'] = dic[',']
+		del dic[',']
+	if ':' in dic:
+		dic['COL$'] = dic[':']
+	
+		del dic[':']
+
 	write_on_file()
 	#print gra_list
 	#print_token()
@@ -78,9 +86,11 @@ def write_on_file():
 	f = open('dict.txt',"w+")
 	for token,tag in dic.iteritems():
 		for i in range(1,47):
-			line = token + " " + str(i) + tag[:2] + "\n"
+			if tag[:2] == " 1":
+				line = token + " " + str(i) + "\n"
+				f.write(line)
 			tag= tag[2:]
-			f.write(line)
+			#f.write(line)
 	f.close()
 
 	e = open('gram.txt',"w+")
@@ -127,7 +137,7 @@ def modify_raw(filename):
 				continue
 			'''
 			wr += word + "\n"
-		print "wr:", wr
+		#print "wr:", wr
 		if len(wr) > 0:
 			g.write(wr[:-2] + "\n")
 			g.write('COL$\n')
