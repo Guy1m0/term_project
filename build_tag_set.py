@@ -141,6 +141,7 @@ def modify_raw(filename):
 			if word == ".START" or word == "\n":
 				continue
 
+			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,]+','',word)
 			index += 1
 			wr += str(index) + " "
 			if ',' in word:
