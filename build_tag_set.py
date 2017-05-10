@@ -182,10 +182,13 @@ def print_token():
 if __name__ == '__main__':
 
 	args = sys.argv[1:]
-	if args == []:
+	if args[0] == '0':
 		build_dict(0)
+	elif args[0] == '-1':
+		pass
 	else:
 		build_dict(int(args[0]))
+
 
 	modify_raw(args[1])
 	'''
