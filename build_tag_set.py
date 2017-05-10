@@ -120,7 +120,7 @@ def modify_raw(filename):
 	g = open('text.txt',"w+")
 	with open("raw/" + filename) as f:
 		lines = f.readlines()
-
+	index = 0
 	#print lines
 	for line in lines:
 
@@ -130,12 +130,18 @@ def modify_raw(filename):
 		wr = ""
 		#print line
 		for word in line.split():
+
 			#print word
 			if word == ".START" or word == "\n":
 				continue
 
+			index += 1
+			wr += str(index) + " "
 			if ',' in word:
 				wr += word[:-1]+"\n"
+				index += 1
+				wr += str(index) + " "
+				
 				wr += 'COM$\n'
 				continue
 			'''
@@ -148,6 +154,8 @@ def modify_raw(filename):
 		#print "wr:", wr
 		if len(wr) > 0:
 			g.write(wr[:-2] + "\n")
+			index += 1
+			g.write(str(index) + " ")
 			g.write('.\n')
 	f.close()
 	g.close()

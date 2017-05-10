@@ -1,26 +1,26 @@
-Rudolph
-Agnew
-COM$
-55
-years
-old
-and
-former
-chairman
-of
-Consolidated
-Gold
-Fields
-PLC
-COM$
-was
-named
-a
-nonexecutive
-director
-of
-this
-British
-industrial
-conglomerate
-.
+1 Rudolph
+2 Agnew
+3 COM$
+4 55
+5 years
+6 old
+7 and
+8 former
+9 chairman
+10 of
+11 Consolidated
+12 Gold
+13 Fields
+14 PLC
+15 COM$
+16 was
+17 named
+18 a
+19 nonexecutive
+20 director
+21 of
+22 this
+23 British
+24 industrial
+25 conglomerate
+26 .
