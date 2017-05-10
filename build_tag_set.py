@@ -141,9 +141,17 @@ def modify_raw(filename):
 			if word == ".START" or word == "\n":
 				continue
 
-			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,]+','',word)
+			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,\/]+','',word)
 			index += 1
 			wr += str(index) + " "
+			if '/' in word:
+				inx = word.find('/')
+				#print inx
+				wr += word[:inx] + "\n"
+				word = word[inx+1:]
+				index += 1
+				wr += str(index) + " "
+
 			if ',' in word:
 				wr += word[:-1]+"\n"
 				index += 1
@@ -153,10 +161,13 @@ def modify_raw(filename):
 				continue
 
 			if "'s" in word:
-				wr += "'s\n"
-				word = word[:-2]
+				
+				wr += word[:-2] + "\n"
+				
 				index += 1
 				wr += str(index) + " "
+				wr += "'s\n"
+				continue
 			'''
 			if ':' in word or ';' in word:
 				wr += word[:-1]+"\n"
