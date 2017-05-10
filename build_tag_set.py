@@ -98,6 +98,43 @@ def write_on_file():
 		e.write(line)
 	e.close() 
 
+def modify_raw(filename):
+	g = open('text.txt',"w+")
+	with open("raw/" + filename) as f:
+		lines = f.readlines()
+
+	#print lines
+	for line in lines:
+
+		if line == "\n":
+			continue
+
+		wr = ""
+		#print line
+		for word in line.split():
+			#print word
+			if word == ".START" or word == "\n":
+				continue
+
+			if ',' in word:
+				wr += word[:-1]+"\n"
+				wr += 'COM$\n'
+				continue
+			'''
+			if ':' in word or ';' in word:
+				wr += word[:-1]+"\n"
+				wr += 'COL$\n'
+				continue
+			'''
+			wr += word + "\n"
+		print "wr:", wr
+		if len(wr) > 0:
+			g.write(wr[:-2] + "\n")
+			g.write('COL$\n')
+	f.close()
+	g.close()
+
+
 
 
 def print_token():
@@ -118,6 +155,7 @@ if __name__ == '__main__':
 	else:
 		build_dict(int(args[0]))
 
+	modify_raw(args[1])
 	'''
 	datasets = treebank.tagged_words()
 	for data in datasets:
