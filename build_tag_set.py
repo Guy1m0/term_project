@@ -13,6 +13,12 @@ keys = ['CC','CD','DT','EX','FW','IN','JJ','JJR','JJS','LS',
 	'VBP','VBZ','WDT','WP','WP$','WRB','$','``',"''",'(',
 	')',',','--','.',':','-NONE-']
 
+keys_ = ['CC','CD','DT','EX','FW','IN','JJ','JJR','JJS','LS',
+	'MD','NN','NNP','NNPS','NNS','PDT','POS','PRP','PRP$','RB',
+	'RBR','RBS','RP','SYM','TO','UH','VB','VBD','VBG','VBN',
+	'VBP','VBZ','WDT','WP','WP$','WRB','$','``',"''",'(',
+	')','COM$','--','.','COL$','-NONE-']
+
 def build_dict(size):
 	datasets = treebank.tagged_words()
 	if size > 0:
@@ -87,7 +93,7 @@ def write_on_file():
 	for token,tag in dic.iteritems():
 		for i in range(1,47):
 			if tag[:2] == " 1":
-				line = token + " " + str(i) + "\n"
+				line = token + " " + keys_[i-1] + "\n"
 				f.write(line)
 			tag= tag[2:]
 			#f.write(line)
