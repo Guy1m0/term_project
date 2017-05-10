@@ -152,6 +152,7 @@ def modify_raw(filename):
 				index += 1
 				wr += str(index) + " "
 
+
 			if ',' in word:
 				wr += word[:-1]+"\n"
 				index += 1
@@ -168,6 +169,16 @@ def modify_raw(filename):
 				wr += str(index) + " "
 				wr += "'s\n"
 				continue
+			
+			if "n't" in word:
+				
+				wr += word[:-3] + "\n"
+				
+				index += 1
+				wr += str(index) + " "
+				wr += "n't\n"
+				continue
+			 
 			'''
 			if ':' in word or ';' in word:
 				wr += word[:-1]+"\n"
