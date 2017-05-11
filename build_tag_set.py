@@ -155,11 +155,11 @@ def modify_raw(filename):
 			if '$' in word:
 				inx = word.find('$')
 				#print inx
-				wr += word[:inx] + "\n"
+				wr += word[:inx + 1] + "\n"
 
-				wr += str(index) + " "
-				wr += '$' + "\n"
-				index += 1
+				#wr += str(index) + " "
+				#wr += '$' + "\n"
+				#index += 1
 
 				word = word[inx+1:]
 				index += 1
