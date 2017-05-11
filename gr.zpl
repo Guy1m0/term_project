@@ -23,16 +23,15 @@ set ll := {<i,tk,tkn,tg,tgn> in context_2 * gram_given with <i,tk,tg> in l
 						and <i+1,tkn,tgn> in l};
 						
 #do print context;
-#do print ll;
+do print ll;
 var L[ll] binary;
 var G[gram_given] binary;
-var error[index] binary;
 
 param size:=max(index);
 
-subto flow_in_out: forall <i> in index with i < size:(error[i] +  (sum <a,b,c,d,e> in ll with a==i: L[a,b,c,d,e])) == 1;
+subto flow_in_out: forall <i> in index with i < size: (sum <a,b,c,d,e> in ll with a==i: L[a,b,c,d,e]) == 1;
 subto grammar: forall <a,b,c> in context_2: forall <g1,g2> in gram_given with <a,b,c,g1,g2> in ll: G[g1,g2] >= L[a,b,c,g1,g2];
 
-minimize cost: (sum <g1,g2> in gram_given: G[g1,g2] + 1000 * (sum <i> in index: error[i]));
+minimize cost: sum <g1,g2> in gram_given: G[g1,g2];
 
 
