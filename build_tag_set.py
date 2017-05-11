@@ -116,7 +116,10 @@ def write_on_file():
 
 	#fcfg
 	e.write("WP VBN\n")
-	#e.write("")
+
+	e.write("WP VB\n")
+	e.write("WP VBD\n")
+	e.write("WP VBP\n")
 	e.close()
 
 def tag_update(tag):
@@ -148,6 +151,8 @@ def modify_raw(filename):
 			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,\/\$]+','',word)
 			index += 1
 			wr += str(index) + " "
+
+			#some special case 
 			if '/' in word:
 				inx = word.find('/')
 				#print inx
@@ -170,11 +175,14 @@ def modify_raw(filename):
 				wr += str(index) + " "
 
 			if ',' == word[-1]:
+				#print ",:", word[:-1]
+
 				wr += word[:-1]+"\n"
 				index += 1
 				wr += str(index) + " "
 				
 				wr += 'COM$\n'
+				#print "wr:",wr
 				continue
 
 			if "'s" in word:
@@ -202,7 +210,8 @@ def modify_raw(filename):
 				wr += str(index) + " "
 				wr += "'re\n"
 				continue
-			 
+			
+
 			'''
 			if ':' in word or ';' in word:
 				wr += word[:-1]+"\n"
