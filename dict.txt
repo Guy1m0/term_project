@@ -13774,3 +13774,4 @@ races NNS
 ideological JJ
 expands VBZ
 representative NN
+s' POS

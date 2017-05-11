@@ -62,9 +62,7 @@ def build_dict(size):
 		dic['COL$'] = dic[':']
 	
 		del dic[':']
-	#fcfg
 
-	dic["s'"] = 'POS'
 	write_on_file()
 	
 	#print gra_list
@@ -115,6 +113,10 @@ def write_on_file():
 				f.write(line)
 			tag= tag[2:]
 			#f.write(line)
+	#fcfg
+
+	f.write("s' POS\n")
+
 	#print cs
 	f.close()
 
