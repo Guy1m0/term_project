@@ -62,7 +62,9 @@ def build_dict(size):
 		dic['COL$'] = dic[':']
 	
 		del dic[':']
+	#fcfg
 
+	dic["s'"] = 'POS'
 	write_on_file()
 	
 	#print gra_list
@@ -203,7 +205,7 @@ def modify_raw(filename):
 				#print "wr:",wr
 				continue
 
-			if "'s" in word:
+			if ("'s" or "s'") == word[-2:]:
 				
 				wr += word[:-2] + "\n"
 				
