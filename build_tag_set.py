@@ -207,13 +207,13 @@ def modify_raw(filename):
 				#print "wr:",wr
 				continue
 
-			if ("'s" or "s'") == word[-2:]:
+			if "'s" == word[-2:] or "s'" == word[-2:]:
 				
 				wr += word[:-2] + "\n"
 				
 				index += 1
 				wr += str(index) + " "
-				wr += "'s\n"
+				wr += word[-2:] + "\n"
 				continue
 			
 			if "n't" in word:
