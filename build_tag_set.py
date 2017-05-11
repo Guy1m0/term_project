@@ -6,6 +6,7 @@ from nltk.corpus import treebank
 #grammar list
 gra_list = []
 dic = {}
+#global dic
 
 keys = ['CC','CD','DT','EX','FW','IN','JJ','JJR','JJS','LS',
 	'MD','NN','NNP','NNPS','NNS','PDT','POS','PRP','PRP$','RB',
@@ -19,7 +20,18 @@ keys_ = ['CC','CD','DT','EX','FW','IN','JJ','JJR','JJS','LS',
 	'VBP','VBZ','WDT','WP','WP$','WRB','$','``',"''",'(',
 	')','COM$','--','.','COL$','-NONE-']
 
+dic_ = ['N.V.','F.H.','J.','Co.','N.M.','Cos.','Ms.','Ltd.','etc.','F.W.',
+	'Ky.','K.','H.N.','S.I.','N.C.','L.','D.C.','p.m.','M.','Lt.',
+	'J.L.','A.C.','Miss.','M.D.','N.','U.S.S.R.','Sino-U.S.','Prof.','Minn.','Wis.',
+	'O.','Va.','Ala.','F.','v.','W.D.','vs.','L.P.','N.Y.','U.K.',
+	'Dec.','Mich.','Feb.']
+dic_spc = [u'L.', u'D.C.', u'.', u'p.m.', u'M.', u'Lt.', u'J.L.', u'A.C.', u'Miss.', u'M.D.', u'N.', u'U.S.S.R.', u'Sino-U.S.', u'Prof.', u'Minn.', u'Wis.', u'O.', u'Va.', u'Ala.', u'F.', u'Oct.', u'v.', u'W.D.', u'vs.', u'L.P.', u'N.Y.', u'U.K.', u'Dec.', u'Mich.', u'Feb.', u'Tenn.', u'Ill.', u'Ga.', u'S.', u'Pa.', u'Ore.', u'Sept.', u'non-U.S.', u'R.', u'Inc.', u'P.', u'Rep.', u'La.', u'Gov.', u'L.A.', u'W.N.', u'...', u'Messrs.', u'A.', u'T.', u'Mrs.', u'No.', u'Mr.', u'R.D.', u'Rev.', u'N.H.', u'Sen.', u'W.R.', u'Ariz.', u'Corp.', u'Aug.', u'B.', u'E.C.', u'Jr.', u'St.', u'N.J.', u'U.S.A.', u'J.P.', u'Nev.', u'C.', u'Colo.', u'Mass.', u'14.', u'A.D.', u'D.', u'W.', u'Calif.', u'Wash.', u'Dr.', u'E.', u'Fla.', u'Jan.', u'R.P.', u'C.J.B.', u'Mo.', u'A.L.', u'S.p.A.', u'G.', u'Z.', u'Del.', u'R.I.', u'Sr.', u'Pty.', u'Conn.', u'Md.', u'H.', u'Nov.', u'Ind.', u'E.W.', u'U.S.', u'I.', u'N.V.', u'F.H.', u'J.', u'Co.', u'N.M.', u'Cos.', u'Ms.', u'Ltd.', u'etc.', u'F.W.', u'Ky.', u'K.', u'H.N.', u'S.I.', u'N.C.']
+
 def build_dict(size):
+
+	if size == -1:
+		modify_raw(filename)
+		return
 	datasets = treebank.tagged_words()
 	if size > 0:
 		datasets = datasets[:size]
@@ -52,6 +64,7 @@ def build_dict(size):
 		del dic[':']
 
 	write_on_file()
+	
 	#print gra_list
 	#print_token()
 	#print dic
@@ -80,6 +93,7 @@ def change_tag(ori,tag):
 	return new_tag
 
 def write_on_file():
+	#cs = []
 	g = open('keys.txt',"w+")
 	for key in keys:
 		if key == ',':
@@ -91,12 +105,15 @@ def write_on_file():
 
 	f = open('dict.txt',"w+")
 	for token,tag in dic.iteritems():
+		#if token[-1] == '.':
+			#cs.append(token)
 		for i in range(1,47):
 			if tag[:2] == " 1":
 				line = token + " " + keys_[i-1] + "\n"
 				f.write(line)
 			tag= tag[2:]
 			#f.write(line)
+	#print cs
 	f.close()
 
 	e = open('gram.txt',"w+")
@@ -121,6 +138,7 @@ def write_on_file():
 	e.write("WP VBD\n")
 	e.write("WP VBP\n")
 	e.close()
+	#global dic
 
 def tag_update(tag):
 	if tag == ',':
@@ -210,8 +228,18 @@ def modify_raw(filename):
 				wr += str(index) + " "
 				wr += "'re\n"
 				continue
-			
+				
+			if word[-1] == '.' and word not in dic_spc:
+				#print "word:",word
+				#print len(dic)
+				#if word[:-1] in dic:
+				#if unicode(word[:-1],"utf-8") in dic: #and word.find('.')==(len(word) - 1):
 
+				wr += word[:-1] + "\n"
+				index += 1
+				wr += str(index) + " .\n"
+				continue
+			
 			'''
 			if ':' in word or ';' in word:
 				wr += word[:-1]+"\n"
@@ -221,10 +249,11 @@ def modify_raw(filename):
 			wr += word + "\n"
 		#print "wr:", wr
 		if len(wr) > 0:
-			g.write(wr[:-2] + "\n")
-			index += 1
-			g.write(str(index) + " ")
-			g.write('.\n')
+			g.write(wr)
+			#g.write(wr[:-2] + "\n")
+			#index += 1
+			#g.write(str(index) + " ")
+			#g.write('.\n')
 	f.close()
 	g.close()
 
@@ -250,9 +279,9 @@ if __name__ == '__main__':
 		pass
 	else:
 		build_dict(int(args[0]))
-
-
 	modify_raw(args[1])
+
+	#modify_raw(args[1])
 	'''
 	datasets = treebank.tagged_words()
 	for data in datasets:
