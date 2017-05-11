@@ -173,8 +173,12 @@ def modify_raw(filename):
 			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,\/\$]+','',word)
 			index += 1
 			wr += str(index) + " "
-
+			end_sen = False
 			#some special case 
+			if word[-1] == '.' and word not in dic_spc:
+				end_sen = True
+				word = word[:-1]
+
 			if '/' in word:
 				inx = word.find('/')
 				#print inx
@@ -204,17 +208,18 @@ def modify_raw(filename):
 				wr += str(index) + " "
 				
 				wr += 'COM$\n'
+				word = ""
 				#print "wr:",wr
-				continue
+				
 
-			if "'s" == word[-2:] or "s'" == word[-2:]:
+			if "'s" in word[-2:] or "s'" == word[-2:]:
 				
 				wr += word[:-2] + "\n"
 				
 				index += 1
 				wr += str(index) + " "
 				wr += word[-2:] + "\n"
-				continue
+				word = ""
 			
 			if "n't" in word:
 				
@@ -223,7 +228,8 @@ def modify_raw(filename):
 				index += 1
 				wr += str(index) + " "
 				wr += "n't\n"
-				continue
+				word = ""
+
 			if "'re" in word:
 				
 				wr += word[:-3] + "\n"
@@ -231,15 +237,16 @@ def modify_raw(filename):
 				index += 1
 				wr += str(index) + " "
 				wr += "'re\n"
-				continue
+				word = ""
 				
-			if word[-1] == '.' and word not in dic_spc:
+			if word != "":
+				wr += word + "\n"			
 				#print "word:",word
 				#print len(dic)
 				#if word[:-1] in dic:
 				#if unicode(word[:-1],"utf-8") in dic: #and word.find('.')==(len(word) - 1):
-
-				wr += word[:-1] + "\n"
+			if end_sen:
+				#wr += word[:-1] + "\n"
 				index += 1
 				wr += str(index) + " .\n"
 				continue
@@ -250,7 +257,7 @@ def modify_raw(filename):
 				wr += 'COL$\n'
 				continue
 			'''
-			wr += word + "\n"
+
 		#print "wr:", wr
 		if len(wr) > 0:
 			g.write(wr)
