@@ -113,6 +113,10 @@ def write_on_file():
 		'''
 		line += "\n"
 		e.write(line)
+
+	#fcfg
+	e.write("WP VBN\n")
+	#e.write("")
 	e.close()
 
 def tag_update(tag):
