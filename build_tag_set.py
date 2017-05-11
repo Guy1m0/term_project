@@ -165,17 +165,19 @@ def modify_raw(filename):
 		wr = ""
 		#print line
 		for word in line.split():
-
+			if word.split() == "":
+				continue
 			#print word
 			if word == ".START" or word == "\n":
 				continue
-
+			#print "w:",word
 			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,\/\$]+','',word)
 			index += 1
 			wr += str(index) + " "
 			end_sen = False
 			#some special case 
 			if word[-1] == '.' and word not in dic_spc:
+				#print word
 				end_sen = True
 				word = word[:-1]
 
@@ -212,8 +214,8 @@ def modify_raw(filename):
 				#print "wr:",wr
 				
 
-			if "'s" in word[-2:] or "s'" == word[-2:]:
-				
+			if ("'s" in word[-2:] or "s'" == word[-2:]) and len(word) > 2:
+				#print len(word)
 				wr += word[:-2] + "\n"
 				
 				index += 1
@@ -240,6 +242,7 @@ def modify_raw(filename):
 				word = ""
 				
 			if word != "":
+
 				wr += word + "\n"			
 				#print "word:",word
 				#print len(dic)
