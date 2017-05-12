@@ -9,9 +9,9 @@ dic = {}
 
 gra_map = [] #chossen gra mapping for the text
 #use to record the chosen grammar variables
-un_gra_map = [] #remaining
 
-un_dic = defaultdict(int) 
+
+
 sorted_dic = []
 
 pos_tag = []
@@ -75,50 +75,74 @@ def map(targted,database):
 		#if pos_tag = []			
 
 def prune_1(targted):
+	un_dic = defaultdict(int) 
+	un_gra_map = [] #remaining
 	for pair in targted:
-		if len(pair[0]) > 1 or len(pair[1]) > 1:
+
+		if (len(pair[0]) > 1) or (len(pair[1]) > 1):
 			un_gra_map.append(pair)
 			for p1 in pair[0]:
 				for p2 in pair[1]:
 					un_dic[p1 + ',' + p2] += 1
 			#un_dic[','.join(pair)] += 1
 		else:
-			gra_map.append([pair[0][0],pair[1][0]])
+			p = [pair[0][0],pair[1][0]]
+			if p not in gra_map:
+				gra_map.append(p)
+	#print len(gra_map)
 	#print "mult:", un_gra_map
 	#print "------------------------------"
 	#print "unsorted:", un_dic
 	sorted_dic = sorted(un_dic.items(), key = operator.itemgetter(1))
 	#print "sorted:", sorted_dic
-
-	for gra in reversed(sorted_dic):
-		prune(un_gra_map,gra[0])
+	
+	#for gra in reversed(sorted_dic):
+	while True:
+		#print "before:", sorted_dic
+		#print "un:", len(un_gra_map)
+		[un_dic,un_gra_map] = prune(un_gra_map,sorted_dic[-1][0])
+		#print "after:", un_dic
+		sorted_dic = sorted(un_dic.items(), key = operator.itemgetter(1))
 		#print "------------------------------"
-		#print "un:", un_gra_map
+		#print "un:", len(un_gra_map)
 		if un_gra_map == []:
 			break
 	#print t_map_list
+	
 	print "# of origin 'path':",len(t_map_list)
 	print "# of grammar use:", len(gra_map)
 
 
 def prune(targted, gra):
+	#print "most grammar:", gra
 	un_gra_map = []
 	gra_map.append(gra.split(','))
+	un_dic = defaultdict(int) 
+	#print len(un_dic)
+
 	for pair in targted:
 		#print "pair:",pair
 		finding = False
 		index_1 = 0
 		index_2 = 0
+		tem = []
 		while not finding:
+
 			pair_str = pair[0][index_1]+',' +pair[1][index_2]
+			tem.append(pair_str)
 			if pair_str == gra:
 				#print [pair[0][index_1],pair[1][index_2]]
 				#print "length:",i
 				#print "combination:", list(combo)
-
+				for t in tem[:-1]:
+					un_dic[t] -= 1
 				finding = True
 				break
+			else:
+				un_dic[pair_str] += 1
+
 			index_1 = index_1 + 1
+
 			if index_1 == len(pair[0]):
 				index_1 = 0
 				index_2 = index_2 + 1
@@ -127,15 +151,18 @@ def prune(targted, gra):
 			#print "break out?", finding, i
 
 		if not finding:
+
 			un_gra_map.append(pair)
 
+	return [un_dic,un_gra_map]
 	
 	#print "single:", gra_map
 
 
 
 def comp(targted, database):
-	pass
+	with open(sol) as f:
+		lines = f.readlines()
 
 
 def load_dic(filename):
