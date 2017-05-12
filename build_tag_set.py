@@ -141,7 +141,6 @@ def write_on_file():
 	e.write("WP VB\n")
 	e.write("WP VBD\n")
 	e.write("WP VBP\n")
-	e.close()
 	#global dic
 
 def tag_update(tag):
@@ -171,7 +170,7 @@ def modify_raw(filename):
 			if word == ".START" or word == "\n":
 				continue
 			#print "w:",word
-			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,\/\$]+','',word)
+			word = re.sub('[^a-zA-Z0-9\-\.\'\:\!\&\,\/\$\:\`]+','',word)
 			index += 1
 			wr += str(index) + " "
 			end_sen = False
@@ -180,6 +179,16 @@ def modify_raw(filename):
 				#print word
 				end_sen = True
 				word = word[:-1]
+
+			if word[-1] == '!' and word not in dic_spc:
+				#print word
+				end_sen = True
+				word = word[:-1]
+
+			if word[-1] == ':':
+				end_sen = True
+				word = word[:-1]
+				#print word
 
 			if '/' in word:
 				inx = word.find('/')
@@ -212,9 +221,33 @@ def modify_raw(filename):
 				wr += 'COM$\n'
 				word = ""
 				#print "wr:",wr
-				
+			if "I'm" == word:
+				wr += "I\n"
+				index += 1
+				wr += str(index) + " 'm\n"
+				word = "" 
+			if "`" == word[:1]:
+				wr += "`" + "\n"
+				index += 1
+				wr += str(index) + " "
+				word = word[1:]
 
-			if ("'s" in word[-2:] or "s'" == word[-2:]) and len(word) > 2:
+			if "'" == word[-1:] and len(word) > 1:
+				wr += word[:-1] + "\n"
+				index += 1
+				wr += str(index) + " '\n"
+				word = ""
+
+			if ("'s" in word[-2:]) and len(word) > 2:
+				#print len(word)
+				wr += word[:-2] + "\n"
+				
+				index += 1
+				wr += str(index) + " "
+				wr += word[-2:] + "\n"
+				word = ""
+
+			if ("'d" in word[-2:]) and len(word) > 2:
 				#print len(word)
 				wr += word[:-2] + "\n"
 				
@@ -230,6 +263,15 @@ def modify_raw(filename):
 				index += 1
 				wr += str(index) + " "
 				wr += "n't\n"
+				word = ""
+
+			if "'ve" in word:
+				
+				wr += word[:-3] + "\n"
+				
+				index += 1
+				wr += str(index) + " "
+				wr += "'re\n"
 				word = ""
 
 			if "'re" in word:
