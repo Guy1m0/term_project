@@ -2866,3 +2866,53 @@ G$$$CD                                              1 	(obj:1)
 G$NNPS$NNP                                          1 	(obj:1)
 
 
+SCIP version 1.2.0 [precision: 8 byte] [memory: block] [mode: optimized] [LP solver: Clp trunk]
+Copyright (c) 2002-2009 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+user parameter file <scip.set> not found - using default parameters
+
+
+base directory for ZIMPL parsing: </home/jzhan161/term_project>
+
+original problem has 91212 variables (91212 bin, 0 int, 0 impl, 0 cont) and 90176 constraints
+
+presolving:
+(round 1) 34774 del vars, 19949 del conss, 30 chg bounds, 0 chg sides, 0 chg coeffs, 0 upgd conss, 162034 impls, 9129 clqs
+(round 2) 36064 del vars, 65826 del conss, 30 chg bounds, 14538 chg sides, 0 chg coeffs, 0 upgd conss, 162034 impls, 9129 clqs
+(round 3) 41892 del vars, 71012 del conss, 30 chg bounds, 14538 chg sides, 0 chg coeffs, 0 upgd conss, 162034 impls, 9129 clqs
+(round 4) 45839 del vars, 71428 del conss, 30 chg bounds, 14538 chg sides, 0 chg coeffs, 0 upgd conss, 162034 impls, 9129 clqs
+(round 5) 45854 del vars, 71433 del conss, 30 chg bounds, 14538 chg sides, 0 chg coeffs, 0 upgd conss, 162034 impls, 9129 clqs
+(round 6) 45855 del vars, 71434 del conss, 30 chg bounds, 14538 chg sides, 0 chg coeffs, 18742 upgd conss, 162034 impls, 9129 clqs
+(round 7) 45856 del vars, 71452 del conss, 30 chg bounds, 14538 chg sides, 0 chg coeffs, 18742 upgd conss, 162034 impls, 9129 clqs
+   (0.9s) probing: 101/45356 (0.2%) - 0 fixings, 0 aggregations, 0 implications, 0 bound changes
+   (0.9s) probing aborted: 100/100 successive totally useless probings
+presolving (8 rounds):
+ 45856 deleted vars, 71452 deleted constraints, 30 tightened bounds, 0 added holes, 14538 changed sides, 0 changed coefficients
+ 162034 implications, 9129 cliques
+presolved problem has 45356 variables (45356 bin, 0 int, 0 impl, 0 cont) and 18724 constraints
+   9129 constraints of type <setppc>
+   9595 constraints of type <logicor>
+transformed objective value is always integral (scale: 1)
+Presolving Time: 0.87
+
+ time | node  | left  |LP iter| mem |mdpt |frac |vars |cons |ccons|cols |rows |cuts |confs|strbr|  dualbound   | primalbound  |  gap   
+t 0.9s|     1 |     0 |     0 | 170M|   0 |   - |  45k|  18k|  18k|   0 |   0 |   0 |   0 |   0 |      --      | 9.250682e+06 |    Inf 
+t 0.9s|     1 |     0 |     0 | 169M|   0 |   - |  45k|  18k|  18k|   0 |   0 |   0 |   0 |   0 |      --      | 9.250426e+06 |    Inf 
+b 1.0s|     1 |     0 |     0 | 191M|   0 |   - |  45k|  18k|  18k|  45k|  18k|   0 |   0 |   0 |      --      | 1.594310e+05 |    Inf 
+  3.2s|     1 |     0 | 38753 | 190M|   0 | 183 |  45k|  18k|  18k|  45k|  18k|   0 |   0 |   0 | 3.046250e+04 | 1.594310e+05 | 423.37%
+r 3.2s|     1 |     0 | 38753 | 191M|   0 | 183 |  45k|  18k|  18k|  45k|  18k|   0 |   0 |   0 | 3.046250e+04 | 1.174670e+05 | 285.61%
+R 3.3s|     1 |     0 | 38753 | 192M|   0 | 183 |  45k|  18k|  18k|  45k|  18k|   0 |   0 |   0 | 3.046250e+04 | 1.164670e+05 | 282.33%
+s 3.3s|     1 |     0 | 38753 | 194M|   0 | 183 |  45k|  18k|  18k|  45k|  18k|   0 |   0 |   0 | 3.046250e+04 | 1.154670e+05 | 279.05%
+b 3.3s|     1 |     0 | 38753 | 196M|   0 | 183 |  45k|  18k|  18k|  45k|  18k|   0 |   0 |   0 | 3.046250e+04 | 3.046500e+04 |   0.01%
+  6.8s|     1 |     0 | 38756 | 195M|   0 | 130 |  45k|  18k|  18k|  45k|  18k|   2 |   0 |   0 | 3.046300e+04 | 3.046500e+04 |   0.01%
+ 10.2s|     1 |     0 | 38757 | 196M|   0 |   0 |  45k|  18k|  18k|  45k|  18k|   3 |   0 |   0 | 3.046300e+04 | 3.046500e+04 |   0.01%
+*13.5s|     1 |     0 | 38757 | 197M|   0 |   - |  45k|  18k|  18k|  45k|  18k|   3 |   0 |   0 | 3.046300e+04 | 3.046300e+04 |   0.00%
+
+SCIP Status        : problem is solved [optimal solution found]
+Solving Time (sec) : 13.46
+Solving Nodes      : 1
+Primal Bound       : +3.04630000000000e+04 (9 solutions)
+Dual Bound         : +3.04630000000000e+04
+Gap                : 0.00 %
+
+
