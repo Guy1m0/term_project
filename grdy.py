@@ -66,6 +66,14 @@ def map(targted,database):
 		pos_map.append([t_list[i][0],pos_tag[i]])
 
 	pos_map.append([t_list[-1][-1],pos_tag[-1]])
+	g = open("map","w+")
+	for t in pos_map:
+		g.write(' ')
+		g.write('/'.join(t))
+		g.write(' ')
+		if t[0] == '.':
+			g.write("\n")
+	g.close()
 	#print pos_map
 	#print pos_tag
 	#print "length:",len(t_list),len(t_map_list),len(pos_tag)
