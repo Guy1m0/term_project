@@ -7,34 +7,37 @@ Prerequisites:
 Since the tag dictionary derived from the open-source project NLTK, Natural Language Toolkit, builging new tag dictionary is required the package NLTK installed.
 
 NLTK can be installed as following method:
+```
 sudo pip install -U nltk
-
+```
 And then, run the Python interpreter and type the commands:
->>> import nltk
->>> nltk.download()
-
+```
+import nltk
+nltk.download()
+```
 Running the tests
 As the default dictionary has been provided, dict.txt, the first step is parsing the text for pos-tagging.
-
+```
 python build_tag_set.py -1 filename
-
+```
 Therefore, the system will search the file in raw folder. Among these files, 24k and 2k, which contains around 24,000 or 2,000 words, might be the good option for testing and run the code as following:
-
+```
 python build_tag_set.py -1 2k
-
+```
 or use the existed wsj file
-
+```
 python build_tag_set.py -1 wsj_0001
-
+```
 After parsing, a new generated file text.txt will be updated and ready for tagging. Then please use the following code:
-
+```
 python grdy.py
-
+```
 It will show the running time of the project and save the POS-tag in the file map
 
 For the integer programming, please run the following code to simply the procedure:
-
+```
 time scip -c 'read mm.zpl' -c opt -l filename -c quit
+```
 Therefore, the result will be stored in the file, filename
 
 Testing Result:
