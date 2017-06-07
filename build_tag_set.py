@@ -37,10 +37,14 @@ def build_dict(size):
 		datasets = datasets[:size]
 
 	gra = []
+
 	for data in datasets:
 		token = data[0]
 		tag = data[1]
-		
+
+		if token == '{':
+			print "exist"
+
 		add_new_token(token,tag)
 
 		if len(gra) == 0:
@@ -51,7 +55,7 @@ def build_dict(size):
 			#else:
 				#print "find mult", [gra,tag]
 			gra = tag
-
+	#g.close()
 	print "grammar variables:",len(gra_list)
 	print "dic variables:", len(dic)
 
@@ -116,7 +120,13 @@ def write_on_file():
 	#fcfg
 
 	f.write("s' POS\n")
-
+	f.write("U.S NNP\n")
+	f.write("Letters NNS\n")
+	f.write("Editor NN\n")
+	#f.write('{ (\n')
+	#f.write('} )\n')
+	#f.write('( (\n')
+	#f.write(') )\n')
 	#print cs
 	f.close()
 
@@ -313,9 +323,6 @@ def modify_raw(filename):
 	f.close()
 	g.close()
 
-
-
-
 def print_token():
 	for token,tag in dic.iteritems():
 		print token,":",
@@ -335,7 +342,9 @@ if __name__ == '__main__':
 		pass
 	else:
 		build_dict(int(args[0]))
-	modify_raw(args[1])
+
+	#gen_text_and_tagged(10)
+	#modify_raw(args[1])
 
 	#modify_raw(args[1])
 	'''
